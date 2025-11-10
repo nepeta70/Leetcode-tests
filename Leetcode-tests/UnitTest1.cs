@@ -13,5 +13,18 @@
 
             Assert.Equal(expected, solution);
         }
+
+        [Fact]
+        public void MoveZeroes()
+        {
+            var input = new int[] { 0, 1, 0, 3, 12 };
+
+            new Solution().MoveZeroes(input);
+
+            var expected = new int[] { 1, 3, 12, 0, 0 };
+
+            Assert.Equal(expected, input);
+        }
+
     }
 }
