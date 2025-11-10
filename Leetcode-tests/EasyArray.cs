@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-public class Solution
+﻿public class EasyArray
 {
     public int RemoveDuplicates(int[] nums)
     {
@@ -47,17 +45,11 @@ public class Solution
             nums[i] = k0[i];
         }
     }
-    public bool ContainsDuplicate(int[] nums)
-    {
-        return nums.Length > nums.Distinct().Count();
-    }
+    public bool ContainsDuplicate(int[] nums) => nums.Length > nums.Distinct().Count();
 
-    public int SingleNumber(int[] nums)
-    {
-        return nums.GroupBy(x => x)
+    public int SingleNumber(int[] nums) => nums.GroupBy(x => x)
             .Select(g => new { Value = g.Key, Count = g.Count() })
             .FirstOrDefault(x => x.Count == 1).Value;
-    }
 
     public int[] Intersect(int[] nums1, int[] nums2)
     {
@@ -133,5 +125,44 @@ public class Solution
             }
         }
         return null;
+    }
+
+    public bool IsValidSudoku(char[][] board)
+    {
+        var rows = new Dictionary<int, List<char>>();
+        var squares = new Dictionary<int, List<char>>();
+        for (int i = 0; i < board.Length; i++)
+        {
+            var column = new List<char>();
+            for (int j = 0; j < board.Length; j++)
+            {
+                var cell = board[j][i];
+                if (cell == '.') continue;
+                if (column.Contains(cell)) return false;
+                column.Add(cell);
+                if (!rows.ContainsKey(j))
+                {
+                    rows[j] = [];
+                }
+                var row = rows[j];
+                if (row.Contains(cell)) return false;
+                row.Add(cell);
+
+                int q = 3 * (int)Math.Floor((decimal)i / 3) + (int)Math.Floor((decimal)j / 3);
+                if (!squares.ContainsKey(q))
+                {
+                    squares[q] = [];
+                }
+                var square = squares[q];
+                if (square.Contains(cell)) return false;
+                square.Add(cell);
+            }
+        }
+        return true;
+    }
+
+    public void Rotate(int[][] matrix)
+    {
+
     }
 }
