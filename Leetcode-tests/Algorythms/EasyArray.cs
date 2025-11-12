@@ -167,81 +167,51 @@
     public void Rotate(int[][] matrix)
     {
         var d = matrix.Length;
-        int h = d / 2;
+
         var y0 = 0;
         var d0 = d - 1;
         var d1 = d0;
+        var d2 = d1;
 
-        for (int x = 0; x < h; x++)
+        for (int y = y0; y < d1; y++)
         {
-            for (int y = y0; y < d1; y++)
+            for (int i = 0; i < d2; i++)
             {
-                var d2 = d1;
-                for (int i = 0; i < d2; i++)
-                {
-                    var rowIndex0 = y;
-                    var colIndex0 = y + i;
-                    var previousCell = matrix[rowIndex0][colIndex0];
+                var rowIndex0 = y;
+                var colIndex0 = y + i;
+                var previousCell = matrix[rowIndex0][colIndex0];
 
-                    // new column index = initial row index
-                    // new row index = d0 - initial column index
-                    var colIndex1 = d1 - rowIndex0;
-                    var nextCell = matrix[colIndex0][colIndex1];
-                     // Top to right
-                    matrix[colIndex0][colIndex1] = previousCell;
+                // new column index = initial row index
+                // new row index = d0 - initial column index
+                var colIndex1 = d0 - rowIndex0;
+                var nextCell = matrix[colIndex0][colIndex1];
+                // Top to right
+                matrix[colIndex0][colIndex1] = previousCell;
 
-                    // new row index = previous column index
-                    // new column index = d0 - previous row index
-                    var colIndex2 = d1 - colIndex0;
+                // new row index = previous column index
+                // new column index = d0 - previous row index
+                var colIndex2 = d0 - colIndex0;
 
-                    previousCell = matrix[colIndex1][colIndex2];
-                    // Right to bottom
-                    matrix[colIndex1][colIndex2] = nextCell;
+                previousCell = matrix[colIndex1][colIndex2];
+                // Right to bottom
+                matrix[colIndex1][colIndex2] = nextCell;
 
-                    // new column index = previous row index
-                    // new row index = d0 - previous column index
-                    var colIndex3 = d1 - colIndex1;                    
-                    nextCell = matrix[colIndex2][colIndex3];
+                // new column index = previous row index
+                // new row index = d0 - previous column index
+                var colIndex3 = d0 - colIndex1;
+                nextCell = matrix[colIndex2][colIndex3];
 
-                    // Bottom to left
-                    matrix[colIndex2][colIndex3] = previousCell;
-                    // new row index = previous column index = initial row index
-                    // new column index = d0 - previous row index = initial column index
-                    // Left to top
-                    matrix[rowIndex0][colIndex0] = nextCell;
-                }
-
-                y0++;
-                d1--;
+                // Bottom to left
+                matrix[colIndex2][colIndex3] = previousCell;
+                // new row index = previous column index = initial row index
+                // new column index = d0 - previous row index = initial column index
+                // Left to top
+                matrix[rowIndex0][colIndex0] = nextCell;
             }
+
+            y0++;
+            d1--;
+            d2 -= 2;
         }
-        //var d = matrix.Length;
-        //var h = (int)Math.Floor((decimal)d / 3);
-        //var y0 = 0;
-        //var d0 = d - 1;
-        //var d1 = d0;
-
-        //for (int x = 0; x < h; x++)
-        //{
-        //    for (int y = y0; y < d1; y++)
-        //    {
-        //        var r0 = y;
-        //        var c0 = y;
-
-        //        var cell0 = matrix[r0][c0];
-        //        var c1 = d0 - r0;
-        //        var cell1 = matrix[r0][c1];
-        //        matrix[r0][c1] = cell0;
-        //        cell0 = matrix[c1][c1];
-        //        matrix[c1][c1] = cell1;
-        //        cell1 = matrix[c1][c0];
-        //        matrix[c1][c0] = cell0;
-        //        matrix[r0][c0] = cell1;
-
-        //        y0++;
-        //        d1--;
-        //    }
-        //}
-
     }
 }
