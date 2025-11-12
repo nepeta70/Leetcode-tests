@@ -1,13 +1,14 @@
-﻿namespace Leetcode_tests
+﻿namespace Leetcode_tests.Tests
 {
-    public class UnitTest1
+    public class EasyArrayTests
     {
+        private readonly EasyArray _solution = new();
         [Fact]
         public void PlusOneTest()
         {
             var input = new int[] { 6, 1, 4, 5, 3, 9, 0, 1, 9, 5, 1, 8, 6, 7, 0, 5, 5, 4, 3 };
 
-            var solution = new EasyArray().PlusOne(input);
+            var solution = _solution.PlusOne(input);
 
             var expected = new int[] { 6, 1, 4, 5, 3, 9, 0, 1, 9, 5, 1, 8, 6, 7, 0, 5, 5, 4, 4 };
 
@@ -19,7 +20,7 @@
         {
             var input = new int[] { 0, 1, 0, 3, 12 };
 
-            new EasyArray().MoveZeroes(input);
+            _solution.MoveZeroes(input);
 
             var expected = new int[] { 1, 3, 12, 0, 0 };
 
@@ -40,7 +41,7 @@
                 ['.','.','.','4','1','9','.','.','5'],
                 ['.','.','.','.','8','.','.','7','9']
             ];
-            var result = new EasyArray().IsValidSudoku(board);
+            var result = _solution.IsValidSudoku(board);
 
             Assert.True(result);
         }
@@ -59,7 +60,7 @@
                 ['.','.','.','4','1','9','.','.','5'],
                 ['.','.','.','.','8','.','.','7','9']
             ];
-            var result = new EasyArray().IsValidSudoku(board);
+            var result = _solution.IsValidSudoku(board);
 
             Assert.False(result);
         }
@@ -78,7 +79,7 @@
                 ['.','2','.','9','.','.','.','.','.'],
                 ['.','.','4','.','.','.','.','.','.']
             ];
-            var result = new EasyArray().IsValidSudoku(board);
+            var result = _solution.IsValidSudoku(board);
 
             Assert.False(result);
         }
@@ -97,7 +98,7 @@
                 ['.','.','.','.','.','.','.','.','.'],
                 ['.','.','.','.','.','.','.','.','.']
             ];
-            var result = new EasyArray().IsValidSudoku(board);
+            var result = _solution.IsValidSudoku(board);
 
             Assert.False(result);
         }
@@ -116,9 +117,31 @@
                 ['8','.','.','.','.','.','.','.','.'],
                 ['9','.','.','.','.','.','.','.','.']
             ];
-            var result = new EasyArray().IsValidSudoku(board);
+            var result = _solution.IsValidSudoku(board);
 
             Assert.True(result);
+        }
+
+        [Fact]
+        public void RotateMatrix1()
+        {
+            int[][] matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
+            _solution.Rotate(matrix);
+
+            int[][] expected = [[7, 4, 1], [8, 5, 2], [9, 6, 3]];
+
+            Assert.Equal(expected, matrix);
+        }
+
+        [Fact]
+        public void RotateMatrix2()
+        {
+            int[][] matrix = [[5, 1, 9, 11], [2, 4, 8, 10], [13, 3, 6, 7], [15, 14, 12, 16]];
+            _solution.Rotate(matrix);
+
+            int[][] expected = [[15, 13, 2, 5], [14, 3, 4, 1], [12, 6, 8, 9], [16, 7, 10, 11]];
+
+            Assert.Equal(expected, matrix);
         }
     }
 }
